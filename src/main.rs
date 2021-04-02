@@ -1,11 +1,14 @@
 #![feature(proc_macro_hygiene, decl_macro)]
+#[macro_use] extern crate failure_derive;
 extern crate reqwest;
 #[macro_use] extern crate rocket;
 
-use rocket::http::RawStr;
+mod usb_control;
 
-use std::time::Duration;
+use usb_control::fan_control;
 use reqwest::ClientBuilder;
+use rocket::http::RawStr;
+use std::time::Duration;
 
 
 #[get("/fan/on")]
