@@ -25,7 +25,7 @@ sudo apt-get install uhubctl
 
 ## Start the fan service
 - `cargo build`
-- `sudo target/debug/smartgarden-hardware-follower`
+- `sudo ./target/debug/smartgarden-hardware-follower`
 
 ## Future Work
 - [ ] user space usb control software
