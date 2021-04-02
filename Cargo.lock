@@ -1549,6 +1549,8 @@ checksum = "fe0f37c9e8f3c5a4a66ad655a93c74daac4ad00c441533bf5c6e7990bb42604e"
 name = "smartgarden-hardware-follower"
 version = "0.1.0"
 dependencies = [
+ "failure",
+ "failure_derive",
  "reqwest",
  "rocket",
  "rocket_codegen",
