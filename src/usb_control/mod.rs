@@ -2,7 +2,7 @@ use std::process::{Command, Output};
 
 // TODO: env
 // hardcoded value for the usb hub on the raspberry pi
-const FAN_PORT = 2;
+const FAN_PORT: i32 = 2;
 
 #[derive(Debug, Fail)]
 pub enum UsbControlError {

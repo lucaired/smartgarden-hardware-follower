@@ -5,32 +5,26 @@ extern crate reqwest;
 
 mod usb_control;
 
-use usb_control::fan_control;
-use reqwest::ClientBuilder;
-use rocket::http::RawStr;
-use std::time::Duration;
+use crate::usb_control::fan_control;
+use failure::Error;
 
 
 #[get("/fan/on")]
-fn fan_on() -> Result<String, Box<std::error::Error>> {
-    let request_url = format!("https://api.github.com/users/{}", user);
-    
-    let timeout = Duration::new(5, 0);
-    let client = ClientBuilder::new().timeout(timeout).build()?;
-    let response = client.head(&request_url).send()?;
-
-    if response.status().is_success() {
-        Ok(format!("{} is a user!", user))
-    } else {
-        Ok(format!("{} is not a user!", user))
-    }
+fn fan_on() -> Result<String, Error> {
+    fan_set_state(&"on")
 }
 
 #[get("/fan/on")]
-fn fan_off() -> Result<String, Box<std::error::Error>> {
-    // TODO: call to usb control
+fn fan_off() -> Result<String, Error> {
+    fan_set_state(&"off")
+}
+
+fn fan_set_state(state: &str) -> Result<String, Error> {
+    fan_control(state)?;
+    Ok(format!("Fan turned {}", state))
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index, check]).launch();
+    // TODO: set port from env
+    rocket::ignite().mount("/", routes![fan_on, fan_off]).launch();
 }
