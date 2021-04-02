@@ -1,6 +1,5 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 #[macro_use] extern crate failure_derive;
-extern crate reqwest;
 #[macro_use] extern crate rocket;
 
 mod usb_control;
@@ -14,7 +13,7 @@ fn fan_on() -> Result<String, Error> {
     fan_set_state(&"on")
 }
 
-#[get("/fan/on")]
+#[get("/fan/off")]
 fn fan_off() -> Result<String, Error> {
     fan_set_state(&"off")
 }
